@@ -58,3 +58,19 @@ jobs:
       - name: Lint Terraform code
         run: terraform fmt -recursive -check
         working-directory: ./src
+
+  validate-iac:
+    name: Validate IaC
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Validate Terraform code
+        run: terraform validate
+        working-directory: ./src
