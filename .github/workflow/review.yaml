@@ -57,4 +57,4 @@ jobs:
 
       - name: Lint Terraform code
         run: terraform fmt -recursive -check
-        working-directory: ./src
+        working-directory: ./infra
