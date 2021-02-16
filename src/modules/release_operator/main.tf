@@ -1,15 +1,9 @@
 resource "google_service_account" "release_operator" {
   account_id   = var.release_operator_sa_id
   display_name = "Release Operator Service Account"
-  description  = "A service account authorized for CI/CD"
+  description  = "This service account is authorized for deployments."
 }
 
-resource "google_project_iam_binding" "release_operator_cloud_storage" {
-  role = "roles/storage.objectAdmin"
-
-  members = [
-    "serviceAccount:${google_service_account.release_operator.email}"
-  ]
+resource "google_service_account_key" "release_operator_credentials" {
+  service_account_id = google_service_account.release_operator.name
 }
-
-# TODO: create release operator key

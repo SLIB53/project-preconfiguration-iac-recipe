@@ -9,12 +9,12 @@ variable "gcp_region" {
   description = "The default Google Cloud Platform region"
 }
 
-variable "preconfigure_tfstate_bucket_name" {
+variable "preconfiguration_tfstate_bucket_name" {
   type        = string
-  description = "The Cloud Storage bucket used to store the 'preconfigure' Terraform state (Use this as the GCS backend bucket.)"
+  description = "The Cloud Storage bucket used to store the 'preconfiguration' Terraform state (Use this as the GCS backend bucket.)"
 }
 
-variable "preconfigure_tfstate_bucket_location" {
+variable "preconfiguration_tfstate_bucket_location" {
   type    = string
   default = "us"
 }

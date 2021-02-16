@@ -1,4 +1,4 @@
-# Project Preconfigure IaC Recipe
+# Project Preconfiguration IaC Recipe
 
 This recipe is an Infrastructure as Code (IaC) recipe for preconfiguring a
 cloud project in Google Cloud Platform (GCP).
@@ -10,7 +10,7 @@ The infrastructure managed here consists of:
 - Release Operator
 
 Additionally, the repository is configured with GitHub Actions for linting and
-validation. Since the preconfiguration contains IAM resources, this repository 
+validation. Since the preconfiguration contains IAM resources, this repository
 does not have automated releases and should be run only by an operator
 sufficiently authorized in IAM.
 
@@ -49,8 +49,10 @@ terraform apply src
 
 <!-- ### Migrating to Remote Backend
 
-The first time this recipe is used, the backend will be external. You can run 
+The first time this recipe is used, the backend will be external. You can run
 this locally at first, and then it can be migrated to the
 [gcs backend][terraform-gcs-backend].
 
 [terraform-gcs-backend]: https://www.terraform.io/docs/language/settings/backends/gcs.html "Terraform GCS Backend Documentation" -->
+
+<!-- TODO: GitHub Actions setup -->
