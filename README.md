@@ -9,17 +9,18 @@ The infrastructure managed here consists of:
 - Terraform backend resources
 - Release Operator
 
-Additionally, the repository is configured with GitHub Actions for linting and
-validation. Since the preconfiguration contains IAM resources, this repository
-does not have automated releases, and it only should be run by an operator
-sufficiently authorized in IAM.
+Additionally, the repository is configured with GitHub Actions for linting.
+Since the preconfiguration contains IAM resources, this repository does not
+have automated releases, and it only should be run by an operator sufficiently
+authorized in IAM.
 
 ## Setup
 
 This guide will begin from a local backend of Terraform, and then migrate to a
 remote backend (GCS).
 
-For each environment, follow through to the end of remote backend migration in order to:
+For each environment, follow through to the end of remote backend migration in
+order to:
 
 - avoid conflating environments
 - to ensure that setup is possible in lower environments before attempting
@@ -48,7 +49,8 @@ Now you may run `plan` and/or `apply`:
 terraform apply
 ```
 
-<sub>Hint: You will need to be authorized for modifying your GCP project. Try running `gcloud auth application-default login`.</sub>
+<sub>Hint: You will need to be authorized for modifying your GCP project. Try
+running `gcloud auth application-default login`.</sub>
 
 ### Migrating to Remote Backend
 
@@ -70,7 +72,8 @@ terraform {
 }
 ```
 
-Then, rerun `init` and pass the preconfiguration backend bucket in a [partial backend configuration][terraform-backend-partial-configuration]:
+Then, rerun `init` and pass the preconfiguration backend bucket in a
+[partial backend configuration][terraform-backend-partial-configuration]:
 
 ```sh
 terraform init # interactive partial backend configuration
@@ -91,7 +94,8 @@ environments.**
 
 ## Usage
 
-The resources created in this preconfiguration will help quickly bootstrap the main IaC repository. You will need:
+The resources created in this preconfiguration will help quickly bootstrap the
+main IaC repository. You will need:
 
 - the project backend bucket
 - private key of the Release Operator (for setting up CI/CD)
