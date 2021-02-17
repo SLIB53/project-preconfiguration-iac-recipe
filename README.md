@@ -16,15 +16,15 @@ authorized in IAM.
 
 ## Setup
 
-This guide will begin from a local backend of Terraform, and then migrate to a
+This guide will begin from a local backend for Terraform, and then migrate to a
 remote backend (GCS).
 
 For each environment, follow through to the end of remote backend migration in
 order to:
 
 - avoid conflating environments
-- to ensure that setup is possible in lower environments before attempting
-  setup in the highest environment
+- ensure that setup is possible in lower environments before attempting
+  setup in higher environments
 
 <sub>Note: workspaces are not used since all workspaces would be migrated to
 remote backend.</sub>
@@ -72,7 +72,7 @@ terraform {
 }
 ```
 
-Then, rerun `init` and pass the preconfiguration backend bucket in a
+Lastly, rerun `init` and pass the preconfiguration backend bucket in a
 [partial backend configuration][terraform-backend-partial-configuration]:
 
 ```sh
@@ -94,8 +94,8 @@ environments.**
 
 ## Usage
 
-The resources created in this preconfiguration will help quickly bootstrap the
-main IaC repository. You will need:
+The resources created in this preconfiguration will help to quickly bootstrap
+the main IaC repository. You will need:
 
 - the project backend bucket
 - private key of the Release Operator (for setting up CI/CD)
@@ -106,10 +106,11 @@ To see the project backend bucket, use `output`:
 terraform output project_backend_bucket
 ```
 
-To find the Release Operator private key, inspect the Terraform state:
+To get a key for the Release Operator, create one using `gcloud`:
 
 ```sh
-terraform show -json # CAUTION: showing state in JSON reveals sensitive data
+gcloud iam service-accounts keys create ~/release_operator_key.json \
+  --iam-account `terraform output -raw project_release_operator_sa`
 ```
 
 [terraform-gcs-backend]: https://www.terraform.io/docs/language/settings/backends/gcs.html "Terraform GCS Backend Documentation"
