@@ -81,12 +81,12 @@ terraform init # interactive partial backend configuration
 
 ### End of Setup
 
-Setup is complete, but please take note of the variables and outputs 
-(especially the `preconfiguration_backend_bucket`, which you can use to recover 
+Setup is complete, but please take note of the variables and outputs
+(especially the `preconfiguration_backend_bucket`, which you can use to recover
 the variables and outputs).
 
 **You will need to run through this setup independently for each environment.
-Consider using a branching strategy such as [GitHub Flow][github-flow-guide] to 
+Consider using a branching strategy such as [GitHub Flow][github-flow-guide] to
 manage releases across environments.**
 
 ## Usage
