@@ -26,9 +26,6 @@ order to:
 - ensure that setup is possible in lower environments before attempting
   setup in higher environments
 
-<sub>Note: workspaces are not used since all workspaces would be migrated to
-remote backend.</sub>
-
 Run through setup from the [infra folder](./infra):
 
 ```sh
@@ -43,20 +40,20 @@ Firstly, you will need to run `init`:
 terraform init
 ```
 
-Now you may run `plan` and/or `apply`:
+Now you may run `plan` or `apply`:
 
 ```sh
 terraform apply
 ```
 
-<sub>Hint: You will need to be authorized for modifying your GCP project. Try
+<sub>Hint: Only an authorized machine can modify GCP resources. Try
 running `gcloud auth application-default login`.</sub>
 
 ### Migrating to Remote Backend
 
-The first time this recipe is used, the backend is local. You can run this
-locally at first, but then it should be migrated to the
-[gcs backend][terraform-gcs-backend].
+The recipe initially uses a local backend. While you can run this locally at
+first, you should eventually migrate to a remote backend, such as [gcs
+backend][terraform-gcs-backend].
 
 Before you begin, take note of the preconfiguration backend bucket:
 
@@ -84,18 +81,18 @@ terraform init # interactive partial backend configuration
 
 ### End of Setup
 
-Now that setup is complete, please take note of the variables and outputs
-(especially the `preconfiguration_backend_bucket`, which can be used to recover
+Setup is complete, but please take note of the variables and outputs 
+(especially the `preconfiguration_backend_bucket`, which you can use to recover 
 the variables and outputs).
 
 **You will need to run through this setup independently for each environment.
-Consider using a branch strategy such as GitFlow to manage releasing across
-environments.**
+Consider using a branching strategy such as [GitHub Flow][github-flow-guide] to 
+manage releases across environments.**
 
 ## Usage
 
-The resources created in this preconfiguration will help to quickly bootstrap
-the main IaC repository. You will need:
+The resources created in this preconfiguration will help to bootstrap
+the main IaC repository quickly. You will need:
 
 - the project backend bucket
 - private key of the Release Operator (for setting up CI/CD)
@@ -115,3 +112,4 @@ gcloud iam service-accounts keys create ~/release_operator_key.json \
 
 [terraform-gcs-backend]: https://www.terraform.io/docs/language/settings/backends/gcs.html "Terraform GCS Backend Documentation"
 [terraform-backend-partial-configuration]: https://www.terraform.io/docs/language/settings/backends/configuration.html#partial-configuration
+[github-flow-guide]: https://guides.github.com/introduction/flow/
