@@ -7,6 +7,13 @@ provider "google" {
   region  = var.gcp_region
 }
 
+# TODO: configure default SA for production grade environments
+# resource "google_project_default_service_accounts" "default_service_account_reconfiguration" {
+#   project = var.gcp_project_id
+
+#   action = "DEPRIVILEGE"
+# }
+
 module "api_enablements" {
   source = "./modules/api_enablements"
 }
@@ -36,4 +43,19 @@ resource "google_storage_bucket_iam_member" "release_operator_backend_access" {
   role   = "roles/storage.objectAdmin"
 
   member = module.project_release_operator.as_member
+}
+
+resource "google_project_iam_member" "release_operator_cloud_run_access" {
+  role = "roles/run.admin"
+
+  member = module.project_release_operator.as_member
+}
+
+resource "google_service_account_iam_binding" "release_operator_default_compute_user" {
+  service_account_id = "projects/${var.gcp_project_id}/serviceAccounts/${var.gcp_project_number}-compute@developer.gserviceaccount.com"
+  role               = "roles/iam.serviceAccountUser"
+
+  members = [
+    module.project_release_operator.as_member
+  ]
 }

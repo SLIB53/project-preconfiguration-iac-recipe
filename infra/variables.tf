@@ -3,6 +3,11 @@ variable "gcp_project_id" {
   description = "The Google Cloud Platform project id"
 }
 
+variable "gcp_project_number" {
+  type        = string
+  description = "The Google Cloud Platform project number"
+}
+
 variable "gcp_region" {
   type        = string
   default     = "us-central1"
